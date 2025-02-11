@@ -11,4 +11,5 @@ COPY . .
 EXPOSE ${PORT:-3000}
 
 # Run Uvicorn, binding to the Railway PORT or defaulting to 3000
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-3000}"]
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-3000} --interface ipv4"]
+
