@@ -14,6 +14,8 @@ jobs:
       - name: Build Images with Docker Compose
         run: |
           docker compose build
+        env:
+          DOCKER_BUILDKIT: 1
 
       - name: Install Railway CLI
         run: npm install -g @railway/cli
@@ -26,4 +28,4 @@ jobs:
 
       - name: Deploy to Railway
         run: |
-          railway deploy
+          railway deploy --verbose
