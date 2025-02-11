@@ -7,8 +7,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Expose port 8000 (default if PORT is not provided)
-EXPOSE ${PORT:-8000}
+# Expose port 3000 (or the value of PORT if set)
+EXPOSE ${PORT:-3000}
 
-# Start Uvicorn, binding to the Railway-provided port or defaulting to 8000
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Run Uvicorn, binding to the Railway PORT or defaulting to 3000
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-3000}"]
