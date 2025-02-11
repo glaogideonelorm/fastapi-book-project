@@ -26,8 +26,9 @@ EXPOSE 80
 # Create an entrypoint script to start Nginx and Uvicorn.
 RUN echo '#!/bin/sh' > /entrypoint.sh && \
     echo 'nginx -g "daemon off;" & ' >> /entrypoint.sh && \
-    echo 'uvicorn main:app --host 0.0.0.0 --port 3000' >> /entrypoint.sh && \
+    echo 'uvicorn main:app --host 0.0.0.0 --no-server-header --port 3000' >> /entrypoint.sh && \
     chmod +x /entrypoint.sh
 
 # Start the entrypoint.
 CMD ["/entrypoint.sh"]
+
