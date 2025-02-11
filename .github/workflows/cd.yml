@@ -11,19 +11,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-     
+      
       - name: Build Images with Docker Compose
         run: |
-          docker-compose build
+          docker compose build
 
+      
       - name: Deploy to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
         run: |
-          # Install the Railway CLI via npm
           npm install -g railway
-          # Log in using your Railway token
           railway login --token $RAILWAY_TOKEN
-          # Deploy the latest code to your Railway project
           railway deploy --project $RAILWAY_PROJECT_ID --token $RAILWAY_TOKEN
