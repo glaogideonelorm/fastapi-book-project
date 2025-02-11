@@ -7,14 +7,14 @@ services:
       dockerfile: Dockerfile.app
     container_name: fastapi_app
     expose:
-      - "3000"
-
+      - "3000"   # No ports mapping here, only exposed internally
+    
   nginx:
     build:
       context: .
       dockerfile: Dockerfile.nginx
     container_name: nginx_proxy
     ports:
-      - "80:80"
+      - "80:80"  # Maps host port 80 to container port 80
     depends_on:
       - web
