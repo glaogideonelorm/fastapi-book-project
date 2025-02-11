@@ -11,21 +11,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      # Build Docker images for both FastAPI and Nginx using Docker Compose v2 syntax.
+      # Build Docker images using Docker Compose v2 syntax.
       - name: Build Images with Docker Compose
         run: docker compose build
 
-      # Install the new Railway CLI (using @railway/cli)
+      # Install the Railway CLI
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
-      # Login to Railway using browserless login for non-interactive environments.
-      - name: Railway Login (Browserless)
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway login --browserless
-
-      # Deploy the project using 'railway up' (which deploys the current directory)
+      # Deploy the project using Railway CLI (token is picked up automatically)
       - name: Deploy to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
