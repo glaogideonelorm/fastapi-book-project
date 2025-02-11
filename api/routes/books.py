@@ -41,7 +41,7 @@ async def create_book(book: Book):
     )
 
 
-@router.get("/api/v1/books/{book_id}", status_code=status.HTTP_200_OK)
+@router.get("/{book_id}", status_code=status.HTTP_200_OK)
 async def get_book(book_id: int):
     book = db.books.get(book_id)
     if book is None:
@@ -49,6 +49,7 @@ async def get_book(book_id: int):
             status_code=status.HTTP_404_NOT_FOUND, detail="Book not found"
         )
     return book.model_dump()
+
 
 
 @router.get(
