@@ -1,0 +1,32 @@
+name: CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      
+      - name: Set Up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      
+      - name: Install Railway CLI
+        run: npm install -g railway
+
+      - name: Deploy to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
+        run: |
+          # Log in to Railway using your token
+          railway login --token $RAILWAY_TOKEN
+          # Deploy the latest commit to your Railway project.
+          railway deploy --project $RAILWAY_PROJECT_ID --token $RAILWAY_TOKEN
