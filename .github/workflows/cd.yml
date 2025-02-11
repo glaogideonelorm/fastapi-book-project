@@ -11,21 +11,21 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
+     
       - name: Build Images with Docker Compose
         run: |
           docker compose build
-        env:
-          DOCKER_BUILDKIT: 1
 
+     
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
-      - name: Railway Login
+      
+      - name: Railway Login (Browserless)
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: |
-          railway login
+        run: railway login --browserless
 
+      
       - name: Deploy to Railway
-        run: |
-          railway deploy --verbose
+        run: railway deploy
