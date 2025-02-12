@@ -19,6 +19,7 @@ COPY . .
 # Copy custom Nginx configuration.
 # Make sure your nginx.conf uses: proxy_pass http://127.0.0.1:3000;
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 80 (Nginx will listen on this port).
 EXPOSE 80
