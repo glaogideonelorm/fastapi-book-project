@@ -16,9 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code.
 COPY . .
 
-# Copy custom Nginx configuration.
-# Make sure your nginx.conf uses: proxy_pass http://127.0.0.1:3000;
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy complete custom Nginx configuration.
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 80 (Nginx will listen on this port).
@@ -32,4 +30,3 @@ RUN echo '#!/bin/sh' > /entrypoint.sh && \
 
 # Start the entrypoint.
 CMD ["/entrypoint.sh"]
-
