@@ -74,7 +74,7 @@ fastapi-book-project/
 
 ## Running the Application
 
-### Using Uvicorn (Local Testing without Docker)
+### Using Uvicorn ( Local Testing without Docker)
 
 1. **Start the server:**
 
