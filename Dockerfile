@@ -16,9 +16,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code.
 COPY . .
 
-# Copy custom Nginx configuration.
-# Make sure your nginx.conf uses: proxy_pass http://127.0.0.1:3000;
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy complete custom Nginx configuration.
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 80 (Nginx will listen on this port).
 EXPOSE 80
@@ -26,7 +25,7 @@ EXPOSE 80
 # Create an entrypoint script to start Nginx and Uvicorn.
 RUN echo '#!/bin/sh' > /entrypoint.sh && \
     echo 'nginx -g "daemon off;" & ' >> /entrypoint.sh && \
-    echo 'uvicorn main:app --host 0.0.0.0 --port 3000' >> /entrypoint.sh && \
+    echo 'uvicorn main:app --host 0.0.0.0 --no-server-header --port 3000' >> /entrypoint.sh && \
     chmod +x /entrypoint.sh
 
 # Start the entrypoint.
