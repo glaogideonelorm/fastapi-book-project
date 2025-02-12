@@ -29,7 +29,7 @@ fastapi-book-project/
 │   └── router.py           # API router configuration
 ├── core/
 │   ├── __init__.py
-│   └── config.py           # Application settings
+│   └── config.py           #  Application settings
 ├── tests/
 │   ├── __init__.py
 │   └── test_books.py       # API endpoint tests
