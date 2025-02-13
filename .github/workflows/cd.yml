@@ -29,7 +29,20 @@ jobs:
       - name: Deploy to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up --detach --service fastapi-book-project
+        run: |
+          set -o pipefail
+          echo "Starting deployment..."
+          output=$(railway up --detach --service fastapi-book-project 2>&1)
+          exit_code=$?
+          echo "$output"
+          if [ $exit_code -ne 0 ]; then
+            if echo "$output" | grep -qi "Deployment cancelled"; then
+              echo "Benign 'Deployment cancelled' detected; ignoring error."
+            else
+              echo "Unexpected deployment error detected."
+              exit $exit_code
+            fi
+          fi
 
       - name: Post-deployment delay
         run: |
